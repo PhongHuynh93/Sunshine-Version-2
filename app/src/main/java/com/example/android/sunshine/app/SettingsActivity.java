@@ -55,6 +55,7 @@ public class SettingsActivity extends PreferenceActivity
 
         // Trigger the listener immediately with the preference's
         // current value.
+        // TODO: 8/13/16 1 -  ngay vừa lúc mở preference, hiển thị liền 2 giá trị được store trong pref
         onPreferenceChange(preference,
                 PreferenceManager
                         .getDefaultSharedPreferences(preference.getContext())

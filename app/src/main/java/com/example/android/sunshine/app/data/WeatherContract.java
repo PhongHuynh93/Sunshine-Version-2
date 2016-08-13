@@ -19,7 +19,9 @@ import android.provider.BaseColumns;
 import android.text.format.Time;
 
 /**
- * Defines table and column names for the weather database.
+ * todo 2 - Defines table and column names for the weather database.
+ * NHỚ Là lúc nào khi tạo db thì hảy tạo class contract giống y như vậy
+ *
  */
 public class WeatherContract {
 
@@ -33,8 +35,11 @@ public class WeatherContract {
         return time.setJulianDay(julianDay);
     }
 
-    /*
+    /**
+        todo 2a - nhớ sub class BaseColumns để được thừa kế cột _id
+        @see <a href="https://developer.android.com/reference/android/provider/BaseColumns.html"></a>
         Inner class that defines the contents of the location table
+
      */
     public static final class LocationEntry implements BaseColumns {
 

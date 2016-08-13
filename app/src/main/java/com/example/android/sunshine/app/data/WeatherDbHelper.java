@@ -61,17 +61,35 @@ public class WeatherDbHelper extends SQLiteOpenHelper {
                 WeatherEntry.COLUMN_DEGREES + " REAL NOT NULL, " +
 
                 // Set up the location column as a foreign key to location table.
+                /**
+                 * todo 3 see tutorial foreign key and unique
+                 * @see <a href="http://www.w3schools.com/sql/sql_foreignkey.asp"></a>
+                 * @see <a href="http://www.tutorialspoint.com/sqlite/sqlite_using_joins.htm"></a>
+                 * @see <a href="https://en.wikipedia.org/wiki/Join_(SQL)#Inner_join"></a>
+                 *
+                 * foreign key: là column torng table khi insert phải có giá trị thuộc column table kia.
+                 * cột loc_key trỏ tới cột id
+                 */
                 " FOREIGN KEY (" + WeatherEntry.COLUMN_LOC_KEY + ") REFERENCES " +
                 LocationEntry.TABLE_NAME + " (" + LocationEntry._ID + "), " +
 
                 // To assure the application have just one weather entry per day
                 // per location, it's created a UNIQUE constraint with REPLACE strategy
+                /**
+                 * todo 3a see tutorial conflick replace
+                 * tào unique cho nhiều cột chỉ việc thêm dấu , ở giữa
+                 * @see <a href="http://www.w3schools.com/sql/sql_unique.asp"></a
+                 * khi unique bị vi phạm là ta đặt trùng data cho 1 trong 2 cột, replace sẽ trigger
+                 * nó thay data cũ bằng data mới
+                 * @see <a href="https://www.sqlite.org/lang_conflict.html"></a>
+                 */
                 " UNIQUE (" + WeatherEntry.COLUMN_DATE + ", " +
                 WeatherEntry.COLUMN_LOC_KEY + ") ON CONFLICT REPLACE);";
 
         sqLiteDatabase.execSQL(SQL_CREATE_WEATHER_TABLE);
     }
 
+    // TODO: 8/13/16 4 nếu ta sd db làm cache thì trong onUpgrade chỉ việc là xóa và làm lại
     @Override
     public void onUpgrade(SQLiteDatabase sqLiteDatabase, int oldVersion, int newVersion) {
         // This database is only a cache for online data, so its upgrade policy is
