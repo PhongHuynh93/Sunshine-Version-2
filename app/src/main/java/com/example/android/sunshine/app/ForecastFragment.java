@@ -69,6 +69,11 @@ public class ForecastFragment extends Fragment {
         inflater.inflate(R.menu.forecastfragment, menu);
     }
 
+    /**
+     * todo 5 nếu thêm tag parent trong android manifest thì home/up sẽ tự động up
+     * @param item
+     * @return
+     */
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         // Handle action bar item clicks here. The action bar will
@@ -114,6 +119,7 @@ public class ForecastFragment extends Fragment {
         return rootView;
     }
 
+    // todo 6 update weather depend on location which store in sharedpreference
     private void updateWeather() {
         FetchWeatherTask weatherTask = new FetchWeatherTask();
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getActivity());
@@ -122,6 +128,7 @@ public class ForecastFragment extends Fragment {
         weatherTask.execute(location);
     }
 
+    // TODO: 8/13/16 7 load new data in onStart
     @Override
     public void onStart() {
         super.onStart();

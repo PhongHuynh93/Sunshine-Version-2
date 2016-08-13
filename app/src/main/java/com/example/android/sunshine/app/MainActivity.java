@@ -60,7 +60,7 @@ public class MainActivity extends ActionBarActivity {
             return true;
         }
 
-        // todo 2 - when click - open preference
+        // todo 2 - when click - open preference to get the location and open map via intent
         if (id == R.id.action_map) {
             openPreferredLocationInMap();
             return true;
@@ -116,7 +116,7 @@ public class MainActivity extends ActionBarActivity {
          */
         intent.setData(geoLocation);
 
-        // TODO: 8/13/16 4 resolveActivity() check to see the there is an app that resolve the intent, chú ý là ta send data ít lại nhờ lọc bằng uri cho nên có it app có khả năng, nên ta phải xét cái này trước 
+        // TODO: 8/13/16 4 resolveActivity() check to see the there is an app that resolve the intent, chú ý là ta send data ít lại nhờ lọc bằng uri cho nên có it app có khả năng, nên ta phải xét cái này trước
         /**
          *  If there are no apps on the device that can receive the implicit intent, your app will crash when it calls startActivity().
          *  To first verify that an app exists to receive the intent, call resolveActivity() on your Intent object.
@@ -124,6 +124,7 @@ public class MainActivity extends ActionBarActivity {
          *  If the result is null, you should not use the intent and, if possible, you should disable the feature that invokes the intent.
          */
         if (intent.resolveActivity(getPackageManager()) != null) {
+            // open another activity
             startActivity(intent);
         } else {
             Log.d(LOG_TAG, "Couldn't call " + location + ", no receiving apps installed!");
