@@ -3,6 +3,9 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <!--todo Opens a dialog with an EditText widget. The saved value is a String.-->
+    <!--defaultValue: Setting Default Values-->
+    <!--key:value trong preference thi ta định nghĩa ở đây-->
     <EditTextPreference
         android:title="@string/pref_location_label"
         android:key="@string/pref_location_key"
@@ -10,6 +13,8 @@
         android:inputType="text"
         android:singleLine="true" />
 
+    <!--Opens a dialog with a list of radio buttons. The saved value can be any one of the supported value types (listed above).-->
+    <!-- -> chỉ chon dc 1 trong tổng số-->
     <ListPreference
         android:title="@string/pref_units_label"
         android:key="@string/pref_units_key"
