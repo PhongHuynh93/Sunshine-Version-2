@@ -42,6 +42,7 @@ public class MainActivity extends ActionBarActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        // TODO: 8/13/16 1 add fragment
         if (savedInstanceState == null) {
             getSupportFragmentManager().beginTransaction()
                     .add(R.id.container, new PlaceholderFragment())
@@ -72,7 +73,7 @@ public class MainActivity extends ActionBarActivity {
     }
 
     /**
-     * A placeholder fragment containing a simple view.
+     * todo 2 A placeholder fragment containing a simple view.
      */
     public static class PlaceholderFragment extends Fragment {
 
@@ -130,7 +131,7 @@ public class MainActivity extends ActionBarActivity {
                 String apiKey = "&APPID=" + BuildConfig.OPEN_WEATHER_MAP_API_KEY;
                 URL url = new URL(baseUrl.concat(apiKey));
 
-                // Create the request to OpenWeatherMap, and open the connection
+                // todo 3 Create the request to OpenWeatherMap, and open the connection
                 urlConnection = (HttpURLConnection) url.openConnection();
                 urlConnection.setRequestMethod("GET");
                 urlConnection.connect();
@@ -163,6 +164,7 @@ public class MainActivity extends ActionBarActivity {
                 // to parse it.
                 return null;
             } finally{
+                // TODO: 8/13/16 todo 4 remember to close the connection
                 if (urlConnection != null) {
                     urlConnection.disconnect();
                 }
