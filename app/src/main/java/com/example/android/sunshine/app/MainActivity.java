@@ -88,20 +88,35 @@ public class MainActivity extends ActionBarActivity {
          <category android:name="android.intent.category.DEFAULT" />
          </intent-filter>
          cach send data via uri sẽ có dấu ":" ở giữa giông như đia chỉ web vậy http://
-         để chỉ key + value 
+         để chỉ key + value
 
          @see <a href="https://developer.android.com/reference/android/content/Intent.html"></a>
          */
 
-        //
+        // vừa tạo uri vừa add para nữa nên mới thêm bắt đầu là buildUpon
+        /**
+         * example
+         * @see <a href="https://developers.google.com/maps/documentation/android-api/intents"></a>
+         *
+        Uri gmmIntentUri = Uri.parse("geo:37.7749,-122.4194");
+        Intent mapIntent = new Intent(Intent.ACTION_VIEW, gmmIntentUri);
+        mapIntent.setPackage("com.google.android.apps.maps");
+        if (mapIntent.resolveActivity(getPackageManager()) != null) {
+        startActivity(mapIntent);
+        }
+         */
         Uri geoLocation = Uri.parse("geo:0,0?").buildUpon()
                 .appendQueryParameter("q", location)
                 .build();
 
         Intent intent = new Intent(Intent.ACTION_VIEW);
+        /**
+         * To set only the data URI, call setData()
+         * @see <a href="https://developer.android.com/guide/components/intents-filters.html"></a>
+         */
         intent.setData(geoLocation);
 
-        // TODO: 8/13/16 4 resolveActivity() check to see the there is an app that resolve the intent
+        // TODO: 8/13/16 4 resolveActivity() check to see the there is an app that resolve the intent, chú ý là ta send data ít lại nhờ lọc bằng uri cho nên có it app có khả năng, nên ta phải xét cái này trước 
         /**
          *  If there are no apps on the device that can receive the implicit intent, your app will crash when it calls startActivity().
          *  To first verify that an app exists to receive the intent, call resolveActivity() on your Intent object.
