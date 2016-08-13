@@ -54,12 +54,13 @@ public class MainActivity extends ActionBarActivity {
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
 
-        //noinspection SimplifiableIfStatement
+        //todo 1 - when click setting button, go to another activity
         if (id == R.id.action_settings) {
             startActivity(new Intent(this, SettingsActivity.class));
             return true;
         }
 
+        // todo 2 - when click - open preference
         if (id == R.id.action_map) {
             openPreferredLocationInMap();
             return true;
@@ -77,6 +78,21 @@ public class MainActivity extends ActionBarActivity {
         // Using the URI scheme for showing a location found on a map.  This super-handy
         // intent can is detailed in the "Common Intents" page of Android's developer site:
         // http://developer.android.com/guide/components/intents-common.html#Maps
+        // todo 3 add location which store in sharefpreference, put in uri and send via Intent
+        // TODO: 8/13/16 3a this ensure only map apps should handle this
+        /**
+         * do app app sẽ có 1 dong này trong android manifest
+         * <intent-filter>
+         <action android:name="android.intent.action.SENDTO" />
+         <data android:scheme="geo:0,0?" /> lấy từ trong parse ra
+         <category android:name="android.intent.category.DEFAULT" />
+         </intent-filter>
+         cach send data via uri
+
+         @see <a href=""></a>
+         */
+
+        //
         Uri geoLocation = Uri.parse("geo:0,0?").buildUpon()
                 .appendQueryParameter("q", location)
                 .build();
@@ -84,6 +100,13 @@ public class MainActivity extends ActionBarActivity {
         Intent intent = new Intent(Intent.ACTION_VIEW);
         intent.setData(geoLocation);
 
+        // TODO: 8/13/16 4 resolveActivity() check to see the there is an app that resolve the intent
+        /**
+         *  If there are no apps on the device that can receive the implicit intent, your app will crash when it calls startActivity().
+         *  To first verify that an app exists to receive the intent, call resolveActivity() on your Intent object.
+         *  If the result is non-null, there is at least one app that can handle the intent and it's safe to call startActivity().
+         *  If the result is null, you should not use the intent and, if possible, you should disable the feature that invokes the intent.
+         */
         if (intent.resolveActivity(getPackageManager()) != null) {
             startActivity(intent);
         } else {
