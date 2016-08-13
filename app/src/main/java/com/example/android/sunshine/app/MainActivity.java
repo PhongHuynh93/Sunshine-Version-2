@@ -87,9 +87,10 @@ public class MainActivity extends ActionBarActivity {
          <data android:scheme="geo:0,0?" /> lấy từ trong parse ra
          <category android:name="android.intent.category.DEFAULT" />
          </intent-filter>
-         cach send data via uri
+         cach send data via uri sẽ có dấu ":" ở giữa giông như đia chỉ web vậy http://
+         để chỉ key + value 
 
-         @see <a href=""></a>
+         @see <a href="https://developer.android.com/reference/android/content/Intent.html"></a>
          */
 
         //
